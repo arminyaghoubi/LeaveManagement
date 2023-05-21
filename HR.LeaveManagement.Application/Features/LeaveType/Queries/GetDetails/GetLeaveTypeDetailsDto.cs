@@ -1,6 +1,6 @@
 ﻿namespace HR.LeaveManagement.Application.Features.LeaveType.Queries.GetDetails;
 
-public class LeaveTypeDetailsDto
+public class GetLeaveTypeDetailsDto
 {
     public int Id { get; set; }
     public DateTime CreationDate { get; set; }

@@ -2,4 +2,4 @@
 
 namespace HR.LeaveManagement.Application.Features.LeaveType.Queries.GetDetails;
 
-public record GetLeaveTypeDetailsQuery(int Id) : IRequest<LeaveTypeDetailsDto>;
+public record GetLeaveTypeDetailsQuery(int Id) : IRequest<GetLeaveTypeDetailsDto>;
