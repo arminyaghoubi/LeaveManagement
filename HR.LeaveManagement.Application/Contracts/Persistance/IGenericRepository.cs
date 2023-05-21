@@ -12,9 +12,9 @@ public interface IGenericRepository<T>
         bool ascending = true,
         int page = 1,
         int pageSize = 20,
-        CancellationToken cancellation = default);
-    Task<T> GetByIdAsync(int id, CancellationToken cancellation = default);
-    Task<T> CreateAsync(T entity, CancellationToken cancellation = default);
-    Task UpdateAsync(T entity, CancellationToken cancellation = default);
-    Task DeleteAsync(T entity, CancellationToken cancellation = default);
+        CancellationToken cancellation=default);
+    Task<T> GetByIdAsync(int id, CancellationToken cancellation);
+    Task<T> CreateAsync(T entity, CancellationToken cancellation);
+    Task UpdateAsync(T entity, CancellationToken cancellation);
+    Task DeleteAsync(int id, CancellationToken cancellation);
 }
