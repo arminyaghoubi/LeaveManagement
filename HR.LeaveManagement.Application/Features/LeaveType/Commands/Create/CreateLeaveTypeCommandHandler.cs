@@ -26,8 +26,8 @@ public class CreateLeaveTypeCommandHandler : IRequestHandler<CreateLeaveTypeComm
 
         var newLeaveType = _mapper.Map<Domain.LeaveType>(request);
 
-        var result = await _repository.CreateAsync(newLeaveType, cancellationToken);
+        await _repository.CreateAsync(newLeaveType, cancellationToken);
 
-        return result.Id;
+        return newLeaveType.Id;
     }
 }

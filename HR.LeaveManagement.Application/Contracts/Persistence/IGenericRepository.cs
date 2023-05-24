@@ -3,19 +3,20 @@ using System.Linq.Expressions;
 
 namespace HR.LeaveManagement.Application.Contracts.Persistance;
 
-public interface IGenericRepository<T>
-    where T : BaseEntity
+public interface IGenericRepository<TEntity>
+    where TEntity : BaseEntity
 {
-    Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> predicate = null,
-        Expression<Func<T, object>> include = null,
-        Expression<Func<T, object>> order = null,
+    Task<IReadOnlyList<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null,
+        Expression<Func<TEntity, object>> include = null,
+        Expression<Func<TEntity, object>> order = null,
         bool ascending = true,
+        bool disableTracking = true,
         int page = 1,
         int pageSize = 20,
         CancellationToken cancellation = default);
-    Task<T> GetByIdAsync(int id, CancellationToken cancellation);
-    Task<T> CreateAsync(T entity, CancellationToken cancellation);
-    Task UpdateAsync(T entity, CancellationToken cancellation);
-    Task DeleteAsync(T entity, CancellationToken cancellation);
-    Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellation);
+    Task<TEntity?> GetByIdAsync(int id, bool disableTracking = true, CancellationToken cancellation = default);
+    Task CreateAsync(TEntity entity, CancellationToken cancellation);
+    Task UpdateAsync(TEntity entity, CancellationToken cancellation);
+    Task DeleteAsync(TEntity entity);
+    Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellation);
 }
