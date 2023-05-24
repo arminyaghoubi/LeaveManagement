@@ -16,9 +16,9 @@ public class DeleteLeaveTypeCommandHandler : IRequestHandler<DeleteLeaveTypeComm
 
     public async Task<Unit> Handle(DeleteLeaveTypeCommand request, CancellationToken cancellationToken)
     {
-        var deleteLeaveType = await _repository.GetByIdAsync(request.Id, cancellationToken) ?? throw new NotFoundException(nameof(Domain.LeaveType), request.Id);
+        var deleteLeaveType = await _repository.GetByIdAsync(request.Id) ?? throw new NotFoundException(nameof(Domain.LeaveType), request.Id);
 
-        await _repository.DeleteAsync(deleteLeaveType, cancellationToken);
+        await _repository.DeleteAsync(deleteLeaveType);
 
         return Unit.Value;
     }

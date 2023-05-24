@@ -18,7 +18,7 @@ public class GetLeaveTypesQueryHandler : IRequestHandler<GetLeaveTypesQuery, IEn
 
     public async Task<IEnumerable<GetLeaveTypesDto>> Handle(GetLeaveTypesQuery request, CancellationToken cancellationToken)
     {
-        var leaveTypes = await _repository.GetAsync(page: request.page, pageSize: request.pageSize, cancellation: cancellationToken);
+        var leaveTypes = await _repository.GetAsync(page: request.Page, pageSize: request.PageSize, cancellation: cancellationToken);
 
         return _mapper.Map<IEnumerable<GetLeaveTypesDto>>(leaveTypes);
     }
