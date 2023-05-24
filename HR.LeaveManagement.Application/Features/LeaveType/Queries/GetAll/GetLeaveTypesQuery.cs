@@ -2,4 +2,4 @@
 
 namespace HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAll;
 
-public record GetLeaveTypesQuery(int page, int pageSize) : IRequest<IEnumerable<GetLeaveTypesDto>>;
+public record GetLeaveTypesQuery(int Page, int PageSize) : IRequest<IEnumerable<GetLeaveTypesDto>>;
