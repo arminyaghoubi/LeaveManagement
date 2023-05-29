@@ -7,6 +7,6 @@ public class DeleteLeaveTypeCommandValidation : AbstractValidator<DeleteLeaveTyp
     public DeleteLeaveTypeCommandValidation()
     {
         RuleFor(d => d.Id)
-            .GreaterThan(0);
+            .GreaterThan(0).WithMessage("{PropertyName} could not be zero");
     }
 }

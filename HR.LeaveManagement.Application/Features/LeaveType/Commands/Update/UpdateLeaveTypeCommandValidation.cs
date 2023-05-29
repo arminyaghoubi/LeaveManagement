@@ -1,16 +1,18 @@
 ﻿using FluentValidation;
 using HR.LeaveManagement.Application.Contracts.Persistance;
-using HR.LeaveManagement.Domain;
 
-namespace HR.LeaveManagement.Application.Features.LeaveType.Commands.Create;
+namespace HR.LeaveManagement.Application.Features.LeaveType.Commands.Update;
 
-public class CreateLeaveTypeCommandValidation : AbstractValidator<CreateLeaveTypeCommand>
+public class UpdateLeaveTypeCommandValidation : AbstractValidator<UpdateLeaveTypeCommand>
 {
     private readonly IGenericRepository<Domain.LeaveType> _repository;
 
-    public CreateLeaveTypeCommandValidation(IGenericRepository<Domain.LeaveType> repository)
+    public UpdateLeaveTypeCommandValidation(IGenericRepository<Domain.LeaveType> repository)
     {
         _repository = repository;
+
+        RuleFor(c => c.Id)
+            .GreaterThan(0).WithMessage("{PropertyName} could not be zero");
 
         RuleFor(c => c.Name)
             .NotEmpty().WithMessage("{PropertyName} is required")
@@ -24,8 +26,14 @@ public class CreateLeaveTypeCommandValidation : AbstractValidator<CreateLeaveTyp
         RuleFor(r => r)
             .MustAsync(UniqueCheck)
             .WithMessage("Leave type already exists");
+
+        RuleFor(r => r)
+            .MustAsync(ExistCheck).WithErrorCode("{PropertyName} not found");
     }
 
-    private async Task<bool> UniqueCheck(CreateLeaveTypeCommand command, CancellationToken cancellation) =>
+    private async Task<bool> UniqueCheck(UpdateLeaveTypeCommand command, CancellationToken cancellation) =>
         !await _repository.AnyAsync(l => l.Name == command.Name, cancellation);
+
+    private async Task<bool> ExistCheck(UpdateLeaveTypeCommand command,CancellationToken cancellation)=>
+        await _repository.AnyAsync(l=>l.Id== command.Id, cancellation);
 }
