@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HR.LeaveManagement.Application.Contracts.Logging;
 using HR.LeaveManagement.Application.Contracts.Persistance;
 using MediatR;
 
@@ -8,11 +9,13 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
 {
     private readonly IMapper _mapper;
     private readonly IGenericRepository<Domain.LeaveType> _repository;
+    private readonly IApplicationLogger<UpdateLeaveTypeCommandHandler> _logger;
 
-    public UpdateLeaveTypeCommandHandler(IMapper mapper, IGenericRepository<Domain.LeaveType> repository)
+    public UpdateLeaveTypeCommandHandler(IMapper mapper, IGenericRepository<Domain.LeaveType> repository, IApplicationLogger<UpdateLeaveTypeCommandHandler> logger)
     {
         _mapper = mapper;
         _repository = repository;
+        _logger = logger;
     }
 
     public async Task<Unit> Handle(UpdateLeaveTypeCommand request, CancellationToken cancellationToken)
