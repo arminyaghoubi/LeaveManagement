@@ -14,10 +14,7 @@ public class LeaveTypeController : BaseController
 {
     private readonly IMediator _mediator;
 
-    public LeaveTypeController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
+    public LeaveTypeController(IMediator mediator) => _mediator = mediator;
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<GetLeaveTypesDto>>> GetAsync([FromQuery] int Page = 1, [FromQuery] int PageSize = 10, CancellationToken cancellation = default) =>
