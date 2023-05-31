@@ -30,7 +30,7 @@ public class LeaveTypeController : BaseController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post([FromBody] CreateLeaveTypeCommand leaveType, CancellationToken cancellation)
+    public async Task<ActionResult> PostAsync([FromBody] CreateLeaveTypeCommand leaveType, CancellationToken cancellation)
     {
         var result = await _mediator.Send(leaveType, cancellation);
         return CreatedAtAction(nameof(GetAsync), new { id = result });
@@ -41,7 +41,7 @@ public class LeaveTypeController : BaseController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> Put(UpdateLeaveTypeCommand leaveType, CancellationToken cancellation)
+    public async Task<ActionResult> PutAsync(UpdateLeaveTypeCommand leaveType, CancellationToken cancellation)
     {
         await _mediator.Send(leaveType, cancellation);
         return NoContent();
@@ -51,7 +51,7 @@ public class LeaveTypeController : BaseController
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> Delete(int id, CancellationToken cancellation)
+    public async Task<ActionResult> DeleteAsync(int id, CancellationToken cancellation)
     {
         await _mediator.Send(new DeleteLeaveTypeCommand { Id = id }, cancellation);
         return NoContent();
