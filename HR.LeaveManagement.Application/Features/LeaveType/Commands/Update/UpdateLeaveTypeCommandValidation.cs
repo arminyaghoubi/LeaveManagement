@@ -32,8 +32,8 @@ public class UpdateLeaveTypeCommandValidation : AbstractValidator<UpdateLeaveTyp
     }
 
     private async Task<bool> UniqueCheck(UpdateLeaveTypeCommand command, CancellationToken cancellation) =>
-        !await _repository.AnyAsync(l => l.Name == command.Name, cancellation);
+        !await _repository.AnyAsync(l => l.Name == command.Name && l.Id != command.Id, cancellation);
 
-    private async Task<bool> ExistCheck(UpdateLeaveTypeCommand command,CancellationToken cancellation)=>
-        await _repository.AnyAsync(l=>l.Id== command.Id, cancellation);
+    private async Task<bool> ExistCheck(UpdateLeaveTypeCommand command, CancellationToken cancellation) =>
+        await _repository.AnyAsync(l => l.Id == command.Id, cancellation);
 }

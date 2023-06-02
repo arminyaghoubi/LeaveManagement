@@ -24,7 +24,7 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
         UpdateLeaveTypeCommandValidation validation = new(_repository);
         var validationResult = await validation.ValidateAsync(request);
 
-        if (validationResult.IsValid)
+        if (!validationResult.IsValid)
         {
             _logger.LogWarning("Validation errors in update request for {0} - {1}", nameof(Domain.LeaveType), request.Id);
             throw new BadRequestException("Invalid Request", validationResult);
