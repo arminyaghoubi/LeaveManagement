@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -16,6 +16,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HR.LeaveManagement.Domain\HR.LeaveManagement.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\LeaveRequest\Commands\Create\" />
+    <Folder Include="Features\LeaveRequest\Commands\Delete\" />
+    <Folder Include="Features\LeaveRequest\Commands\Update\" />
   </ItemGroup>
 
 </Project>
