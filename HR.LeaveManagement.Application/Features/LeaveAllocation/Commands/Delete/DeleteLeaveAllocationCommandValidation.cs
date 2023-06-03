@@ -7,6 +7,6 @@ public class DeleteLeaveAllocationCommandValidation : AbstractValidator<DeleteLe
     public DeleteLeaveAllocationCommandValidation()
     {
         RuleFor(l => l.Id)
-            .GreaterThan(0).WithMessage("{PropertyName} is not found");
+            .GreaterThan(0).WithMessage("{PropertyName} could not be zero");
     }
 }

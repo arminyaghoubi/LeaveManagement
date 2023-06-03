@@ -17,6 +17,6 @@ public interface IGenericRepository<TEntity>
     Task<TEntity?> GetByIdAsync(int id, Expression<Func<TEntity, object>> include = null, bool disableTracking = true, CancellationToken cancellation = default);
     Task CreateAsync(TEntity entity, CancellationToken cancellation);
     Task UpdateAsync(TEntity entity, CancellationToken cancellation);
-    Task DeleteAsync(TEntity entity);
+    Task DeleteAsync(TEntity entity, CancellationToken cancellation);
     Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellation);
 }

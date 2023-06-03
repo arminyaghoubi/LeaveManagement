@@ -61,18 +61,18 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity>
     public async Task CreateAsync(TEntity entity, CancellationToken cancellation)
     {
         await _entities.AddAsync(entity, cancellation);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellation);
     }
 
     public async Task UpdateAsync(TEntity entity, CancellationToken cancellation)
     {
         _entities.Entry(entity).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellation);
     }
 
-    public async Task DeleteAsync(TEntity entity)
+    public async Task DeleteAsync(TEntity entity, CancellationToken cancellation)
     {
         _entities.Remove(entity);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellation);
     }
 }
