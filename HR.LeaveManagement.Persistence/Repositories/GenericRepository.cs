@@ -44,8 +44,17 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         return await query.Take(pageSize).Skip((page - 1) * pageSize).ToListAsync(cancellation);
     }
 
-    public async Task<TEntity?> GetByIdAsync(int id, bool disableTracking = true, CancellationToken cancellation = default) =>
-        disableTracking ? await _entities.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id, cancellation) : await _entities.FindAsync(id, cancellation);
+    public async Task<TEntity?> GetByIdAsync(int id, Expression<Func<TEntity, object>> include = null, bool disableTracking = true, CancellationToken cancellation = default)
+    {
+        var query = _entities.AsQueryable();
+
+        if (include is not null)
+            query = query.Include(include);
+
+        return disableTracking ?
+            await query.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id, cancellation) :
+            await query.FirstOrDefaultAsync(e => e.Id == id, cancellation);
+    }
 
     public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellation) => await _entities.AnyAsync(predicate, cancellation);
 

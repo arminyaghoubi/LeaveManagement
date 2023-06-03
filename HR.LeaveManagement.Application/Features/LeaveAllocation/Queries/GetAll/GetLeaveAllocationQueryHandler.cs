@@ -22,7 +22,7 @@ public class GetLeaveAllocationQueryHandler : IRequestHandler<GetLeaveAllocation
 
     public async Task<IEnumerable<GetLeaveAllocationDto>> Handle(GetLeaveAllocationQuery request, CancellationToken cancellationToken)
     {
-        var leaveAllocations = await _repository.GetAsync(page: request.Page, pageSize: request.PageSize, cancellation: cancellationToken);
+        var leaveAllocations = await _repository.GetAsync(include: r => r.LeaveType, page: request.Page, pageSize: request.PageSize, cancellation: cancellationToken);
 
         _logger.LogInformation("Get Leave Allocations from Database Successfully");
 

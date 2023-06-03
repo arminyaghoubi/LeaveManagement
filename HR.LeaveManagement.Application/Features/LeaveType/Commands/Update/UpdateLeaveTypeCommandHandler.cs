@@ -22,7 +22,7 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
     public async Task<Unit> Handle(UpdateLeaveTypeCommand request, CancellationToken cancellationToken)
     {
         UpdateLeaveTypeCommandValidation validation = new(_repository);
-        var validationResult = await validation.ValidateAsync(request);
+        var validationResult = await validation.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
         {

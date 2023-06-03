@@ -26,6 +26,7 @@ public class LeaveAllocationController : BaseController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
     public async Task<ActionResult> PostAsync(CreateLeaveAllocationCommand leaveAllocation, CancellationToken cancellation)
     {

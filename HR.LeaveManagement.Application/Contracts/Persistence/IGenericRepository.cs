@@ -14,7 +14,7 @@ public interface IGenericRepository<TEntity>
         int page = 1,
         int pageSize = 20,
         CancellationToken cancellation = default);
-    Task<TEntity?> GetByIdAsync(int id, bool disableTracking = true, CancellationToken cancellation = default);
+    Task<TEntity?> GetByIdAsync(int id, Expression<Func<TEntity, object>> include = null, bool disableTracking = true, CancellationToken cancellation = default);
     Task CreateAsync(TEntity entity, CancellationToken cancellation);
     Task UpdateAsync(TEntity entity, CancellationToken cancellation);
     Task DeleteAsync(TEntity entity);
