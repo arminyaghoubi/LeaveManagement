@@ -23,7 +23,7 @@ public class DeleteLeaveAllocationCommandHandler : IRequestHandler<DeleteLeaveAl
 
         var deleteLeaveAllocation = await _repository.GetByIdAsync(request.Id) ?? throw new NotFoundException(nameof(Domain.LeaveAllocation), request.Id);
 
-        await _repository.DeleteAsync(deleteLeaveAllocation);
+        await _repository.DeleteAsync(deleteLeaveAllocation,cancellationToken);
 
         return Unit.Value;
     }
