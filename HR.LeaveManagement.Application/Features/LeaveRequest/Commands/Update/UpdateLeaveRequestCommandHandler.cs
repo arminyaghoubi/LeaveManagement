@@ -18,15 +18,18 @@ public class UpdateLeaveRequestCommandHandler : IRequestHandler<UpdateLeaveReque
 
     public async Task<Unit> Handle(UpdateLeaveRequestCommand request, CancellationToken cancellationToken)
     {
+        var leaveRequest = await _leaveRequestRepository.GetByIdAsync(request.Id, cancellation: cancellationToken) ?? throw new NotFoundException(nameof(Domain.LeaveRequest), request.Id);
+
         UpdateLeaveRequestCommandValidation validation = new();
         var validationResult = await validation.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
             throw new BadRequestException("Invalid Request", validationResult);
 
-        var updateLeaveRequest = _mapper.Map<Domain.LeaveRequest>(request);
 
-        await _leaveRequestRepository.UpdateAsync(updateLeaveRequest, cancellationToken);
+        _mapper.Map(request, leaveRequest);
+
+        await _leaveRequestRepository.UpdateAsync(leaveRequest, cancellationToken);
 
         return Unit.Value;
     }
