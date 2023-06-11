@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace HR.LeaveManagement.Application.Features.LeaveRequest.Commands.Common;
 
-namespace HR.LeaveManagement.Application.Features.LeaveRequest.Commands.Common
+public class BaseLeaveRequestDto
 {
-    internal class BaseLeaveRequestDto
-    {
-    }
+    
 }
