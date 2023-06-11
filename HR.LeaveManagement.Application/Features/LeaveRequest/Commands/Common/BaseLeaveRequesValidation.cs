@@ -19,7 +19,7 @@ public class BaseLeaveRequesValidation : AbstractValidator<BaseLeaveRequestDto>
 
         RuleFor(l => l.LeaveTypeId)
             .GreaterThan(0)
-            .MustAsync(LeaveTypeExist).WithMessage("{PropertyName} dose not exist.")
+            .MustAsync(LeaveTypeExist).WithMessage("{PropertyName} dose not exist.");
     }
 
     private async Task<bool> LeaveTypeExist(int leaveTypeId, CancellationToken cancellation) =>
