@@ -7,7 +7,7 @@ namespace HR.LeaveManagement.UnitTest.Mocks;
 
 public class MockLeaveTypeRepository
 {
-    public Mock<IGenericRepository<LeaveType>> GetLeaveTypes()
+    public static Mock<IGenericRepository<LeaveType>> GetLeaveTypes()
     {
         List<LeaveType> leaveTypes = new List<LeaveType>
         {
