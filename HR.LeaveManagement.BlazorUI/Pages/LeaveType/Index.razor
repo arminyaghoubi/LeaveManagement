@@ -1,0 +1,32 @@
+﻿@page "/LeaveType/Index"
+
+<h3>Leave Types</h3>
+
+@if (LeaveTypes is null)
+{
+    <p>Loading Data...</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Default Days</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in LeaveTypes)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.DefaultDays</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

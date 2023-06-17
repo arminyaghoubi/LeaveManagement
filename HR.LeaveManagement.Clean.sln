@@ -25,11 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR.LeaveManagement.Infrastr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR.LeaveManagement.Api", "HR.LeaveManagement.Api\HR.LeaveManagement.Api.csproj", "{B96325D7-3229-4806-881A-6A6507A06AB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR.LeaveManagement.UnitTest", "HR.LeaveManagement.UnitTest\HR.LeaveManagement.UnitTest.csproj", "{D02CCAE6-03C0-42C9-8CEF-47FB256EAC78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR.LeaveManagement.UnitTest", "HR.LeaveManagement.UnitTest\HR.LeaveManagement.UnitTest.csproj", "{D02CCAE6-03C0-42C9-8CEF-47FB256EAC78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR.LeaveManagement.IntegrationTest", "HR.LeaveManagement.IntegrationTest\HR.LeaveManagement.IntegrationTest.csproj", "{EF942674-7188-4CC6-ADCA-39C1FE7083CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR.LeaveManagement.IntegrationTest", "HR.LeaveManagement.IntegrationTest\HR.LeaveManagement.IntegrationTest.csproj", "{EF942674-7188-4CC6-ADCA-39C1FE7083CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR.LeaveManagement.BlazorUI", "HR.LeaveManagement.BlazorUI\HR.LeaveManagement.BlazorUI.csproj", "{16E66195-C8FA-4D78-B74C-E6B07E442A83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR.LeaveManagement.BlazorUI", "HR.LeaveManagement.BlazorUI\HR.LeaveManagement.BlazorUI.csproj", "{16E66195-C8FA-4D78-B74C-E6B07E442A83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
