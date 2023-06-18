@@ -1,32 +1,71 @@
 ﻿@page "/LeaveType/Index"
 
-<h3>Leave Types</h3>
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Leave Types</h3>
+        <hr />
+        <p>
+            <a href="/LeaveType/Create" class="btn btn-primary">Create</a>
+        </p>
 
-@if (LeaveTypes is null)
+        @if (LeaveTypes is null)
+        {
+            <p>Loading Data...</p>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Default Days</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in LeaveTypes)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.DefaultDays</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a href="/LeaveType/Edit" class="btn btn-primary">Edit</a>
+                                    <a href="/LeaveType/Details" class="btn btn-primary">Details</a>
+                                    <button @onclick="()=>OpenDeleteModal(item)" class="btn btn-primary">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Delete this item?(Name : @DeleteItem?.Name)</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @onclick="()=>DeleteLeaveType()">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => CloseDeleteModal()">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowBackdrop)
 {
-    <p>Loading Data...</p>
-}
-else
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Default Days</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in LeaveTypes)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>@item.DefaultDays</td>
-                    <td></td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="modal-backdrop fade show"></div>
 }

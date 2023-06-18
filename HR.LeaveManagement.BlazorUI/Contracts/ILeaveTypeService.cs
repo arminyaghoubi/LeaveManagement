@@ -13,5 +13,5 @@ public interface ILeaveTypeService
 
     Task<Response<Guid>> UpdateAsync(LeaveTypeViewModel leaveType, CancellationToken cancellation);
 
-    Task<Response<Guid>> DeleteAsync(int id, CancellationToken cancellation);
+    Task<Response<Guid>> DeleteAsync(int id);
 }

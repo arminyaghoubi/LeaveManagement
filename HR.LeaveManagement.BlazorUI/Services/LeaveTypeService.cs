@@ -64,11 +64,11 @@ public class LeaveTypeService : BaseHttpService, ILeaveTypeService
         }
     }
 
-    public async Task<Response<Guid>> DeleteAsync(int id, CancellationToken cancellation)
+    public async Task<Response<Guid>> DeleteAsync(int id)
     {
         try
         {
-            await _client.LeaveTypeDELETEAsync(id, cancellation);
+            await _client.LeaveTypeDELETEAsync(id);
 
             return new Response<Guid>
             {

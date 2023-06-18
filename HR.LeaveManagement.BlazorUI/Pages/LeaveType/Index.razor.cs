@@ -20,6 +20,11 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveType;
 
 public partial class Index
 {
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    public string ModalDisplay = "none;";
+    public LeaveTypeViewModel? DeleteItem = null;
+
     [Inject]
     public ILeaveTypeService Service { get; set; }
 
@@ -38,5 +43,30 @@ public partial class Index
     private async Task LoadLeaveTypes()
     {
         _leaveTypes = await Service.GetAllAsync(1, 20,CancellationToken.None);
+    }
+
+    public void OpenDeleteModal(LeaveTypeViewModel item)
+    {
+        DeleteItem = item;
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void CloseDeleteModal()
+    {
+        DeleteItem = null;
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+
+    public async Task DeleteLeaveType()
+    {
+        await Service.DeleteAsync(DeleteItem.Id);
+        await LoadLeaveTypes();
+        CloseDeleteModal();
     }
 }
