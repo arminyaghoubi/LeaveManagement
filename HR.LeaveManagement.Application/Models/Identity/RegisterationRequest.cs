@@ -2,7 +2,7 @@
 
 namespace HR.LeaveManagement.Application.Models.Identity;
 
-public class RegisterationRequest
+public class RegistrationRequest
 {
     [Required]
     [StringLength(50, MinimumLength = 2)]

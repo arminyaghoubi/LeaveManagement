@@ -51,7 +51,7 @@ public class AuthService : IAuthService
         };
     }
 
-    public async Task<RegisterationResponse> RegisterAsync(RegisterationRequest request)
+    public async Task<RegistrationResponse> RegisterAsync(RegistrationRequest request)
     {
         var user = new ApplicationUser
         {
@@ -66,7 +66,7 @@ public class AuthService : IAuthService
         if (result.Succeeded)
         {
             await _userManager.AddToRoleAsync(user, RoleNames.Employee);
-            return new RegisterationResponse { Id = user.Id };
+            return new RegistrationResponse { Id = user.Id };
         }
         else
         {
