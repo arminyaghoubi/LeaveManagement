@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blazored.LocalStorage;
 using HR.LeaveManagement.BlazorUI.Contracts;
 using HR.LeaveManagement.BlazorUI.Services.Base;
 using HR.LeaveManagement.BlazorUI.ViewModels;
@@ -9,13 +10,16 @@ public class LeaveTypeService : BaseHttpService, ILeaveTypeService
 {
     private readonly IMapper _mapper;
 
-    public LeaveTypeService(IClient client, IMapper mapper) : base(client)
+    public LeaveTypeService(IClient client,
+        ILocalStorageService localStorageService,
+        IMapper mapper) : base(client, localStorageService)
     {
         _mapper = mapper;
     }
 
     public async Task<List<LeaveTypeViewModel>> GetAllAsync(int? page, int? pageSize, CancellationToken cancellation)
     {
+        await AddBearerTokenToHeader();
         var leaveTypes = await _client.LeaveTypeAllAsync(page, pageSize, cancellation);
         return _mapper.Map<List<LeaveTypeViewModel>>(leaveTypes);
     }
