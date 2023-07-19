@@ -1,0 +1,19 @@
+﻿@page "/LeaveType/Details/{id:int}"
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Create Leave Type</h3>
+        <hr />
+        <div Model="@ViewModel">
+
+            <div class="mb-3">
+                <label for="inputName" class="form-label">Name</label>
+                <input readonly class="form-control" id="inputName" value="@ViewModel.Name" />
+            </div>
+            <div class="mb-3">
+                <label for="inputDefaultDays" class="form-label">Default Days</label>
+                <input readonly class="form-control" id="inputDefaultDays" value="@ViewModel.DefaultDays" />
+            </div>
+        </div>
+    </div>
+</div>
