@@ -30,9 +30,11 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
             throw new BadRequestException("Invalid Request", validationResult);
         }
 
-        var updateLeaveType = _mapper.Map<Domain.LeaveType>(request);
+        var leaveType = await _repository.GetByIdAsync(request.Id)??throw new NotFoundException(nameof(Domain.LeaveType),request.Id);
 
-        await _repository.UpdateAsync(updateLeaveType, cancellationToken);
+        _mapper.Map(request, leaveType);
+
+        await _repository.UpdateAsync(leaveType, cancellationToken);
 
         return Unit.Value;
     }

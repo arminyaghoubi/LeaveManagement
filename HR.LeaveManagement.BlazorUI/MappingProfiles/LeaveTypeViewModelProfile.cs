@@ -9,6 +9,7 @@ public class LeaveTypeViewModelProfile : Profile
     public LeaveTypeViewModelProfile()
     {
         CreateMap<GetLeaveTypesDto, LeaveTypeViewModel>();
+        CreateMap<GetLeaveTypeDetailsDto, LeaveTypeViewModel>();
         CreateMap<LeaveTypeViewModel, CreateLeaveTypeCommand>();
         CreateMap<LeaveTypeViewModel, UpdateLeaveTypeCommand>();
     }

@@ -1,0 +1,27 @@
+﻿@page "/LeaveType/Edit/{Id:int}"
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Edit Leave Type</h3>
+        <hr />
+        <EditForm Model="@ViewModel" OnValidSubmit="EditHandler">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+
+            <div class="mb-3">
+                <label for="inputName" class="form-label">Name</label>
+                <InputText class="form-control" id="inputName" @bind-Value="@ViewModel.Name" />
+                <ValidationMessage For="@(()=>ViewModel.Name)"></ValidationMessage>
+            </div>
+            <div class="mb-3">
+                <label for="inputDefaultDays" class="form-label">Default Days</label>
+                <InputNumber class="form-control" id="inputDefaultDays" @bind-Value="@ViewModel.DefaultDays" />
+                <ValidationMessage For="@(()=>ViewModel.DefaultDays)"></ValidationMessage>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
