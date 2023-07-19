@@ -44,6 +44,6 @@ public class BaseHttpService
     protected async Task AddBearerTokenToHeader()
     {
         var token = await _localStorageService.GetItemAsStringAsync("AccessToken");
-        _client.HttpClient.DefaultRequestHeaders.Add("Bearer", token);
+        _client.HttpClient.DefaultRequestHeaders.Add("Authorization",$"Bearer {token}");
     }
 }

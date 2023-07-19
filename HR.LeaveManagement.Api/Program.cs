@@ -12,6 +12,7 @@ var configuration = builder.Configuration;
 
 builder.Services.AddProblemDetails();
 
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: myAllowSpecificOrigins,

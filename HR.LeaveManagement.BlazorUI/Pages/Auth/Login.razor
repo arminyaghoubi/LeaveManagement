@@ -1,0 +1,34 @@
+﻿@page "/Login"
+
+<h3>Login</h3>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        @if (!string.IsNullOrEmpty(Message))
+        {
+            <div class="alert alert-danger" role="alert">
+                @Message
+            </div>
+        }
+        <EditForm Model="@ViewModel" OnValidSubmit="LoginHandle">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+
+            <div class="mb-3">
+                <label for="inputEmail" class="form-label">Email</label>
+                <InputText type="email" class="form-control" id="inputEmail" @bind-Value="@ViewModel.Email" />
+                <ValidationMessage For="@(()=>ViewModel.Email)"></ValidationMessage>
+            </div>
+            <div class="mb-3">
+                <label for="inputPassword" class="form-label">Password</label>
+                <InputText type="password" class="form-control" id="inputPassword" @bind-Value="@ViewModel.Password" />
+                <ValidationMessage For="@(()=>ViewModel.Password)"></ValidationMessage>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
