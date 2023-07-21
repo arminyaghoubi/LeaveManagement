@@ -10,4 +10,21 @@ public class LeaveAllocationService : BaseHttpService, ILeaveAllocationService
         ILocalStorageService localStorageService) : base(client, localStorageService)
     {
     }
+
+    public async Task<Response<Guid>> CreateLeaveAllocationsAsync(int leaveTypeId)
+    {
+        try
+        {
+            await AddBearerTokenToHeader();
+            await _client.LeaveAllocationPOSTAsync(new CreateLeaveAllocationCommand
+            {
+                LeaveTypeId=leaveTypeId
+            });
+            return new Response<Guid>();
+        }
+        catch (ApiException ex)
+        {
+            return ConvertExceptionToResponse(ex);
+        }
+    }
 }

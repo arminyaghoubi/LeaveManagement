@@ -25,8 +25,13 @@ public partial class Index
     public string ModalDisplay = "none;";
     public LeaveTypeViewModel? DeleteItem = null;
 
+    public string ToastMessage { get; set; }
+
     [Inject]
-    public ILeaveTypeService Service { get; set; }
+    public ILeaveTypeService LeaveTypeService { get; set; }
+
+    [Inject]
+    public ILeaveAllocationService LeaveAllocationService { get; set; }
 
     private List<LeaveTypeViewModel> _leaveTypes;
 
@@ -42,10 +47,10 @@ public partial class Index
 
     private async Task LoadLeaveTypes()
     {
-        _leaveTypes = await Service.GetAllAsync(1, 20,CancellationToken.None);
+        _leaveTypes = await LeaveTypeService.GetAllAsync(1, 20,CancellationToken.None);
     }
 
-    public void OpenDeleteModal(LeaveTypeViewModel item)
+    protected void OpenDeleteModal(LeaveTypeViewModel item)
     {
         DeleteItem = item;
         ModalDisplay = "block;";
@@ -54,7 +59,7 @@ public partial class Index
         StateHasChanged();
     }
 
-    public void CloseDeleteModal()
+    protected void CloseDeleteModal()
     {
         DeleteItem = null;
         ModalDisplay = "none";
@@ -63,10 +68,19 @@ public partial class Index
         StateHasChanged();
     }
 
-    public async Task DeleteLeaveType()
+    protected async Task DeleteLeaveType()
     {
-        await Service.DeleteAsync(DeleteItem.Id);
+        await LeaveTypeService.DeleteAsync(DeleteItem.Id);
         await LoadLeaveTypes();
         CloseDeleteModal();
+        ToastMessage = "The deletion was successful.";
+        StateHasChanged();
+    }
+
+    protected async void AllocateLeaveType(int leaveTypeId)
+    {
+        await LeaveAllocationService.CreateLeaveAllocationsAsync(leaveTypeId);
+        ToastMessage = "The Allocation was successful.";
+        StateHasChanged();
     }
 }
