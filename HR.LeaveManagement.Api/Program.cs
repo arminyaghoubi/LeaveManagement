@@ -24,6 +24,8 @@ builder.Services.AddCors(options =>
                       });
 });
 
+builder.Services.AddHttpContextAccessor();
+
 // Add services to the container.
 builder.Services.AddApplicationServices()
     .AddInfrastructureServices(configuration)

@@ -15,7 +15,7 @@ public class BaseLeaveRequesValidation : AbstractValidator<BaseLeaveRequestDto>
             .LessThan(l => l.EndDate).WithMessage("{PropertyName} must be before {ComparisionValue}.");
 
         RuleFor(l => l.EndDate)
-            .LessThan(l => l.StartDate).WithMessage("{PropertyName} must be after {ComparisionValue}.");
+            .GreaterThan(l => l.StartDate).WithMessage("{PropertyName} must be after {ComparisionValue}.");
 
         RuleFor(l => l.LeaveTypeId)
             .GreaterThan(0)

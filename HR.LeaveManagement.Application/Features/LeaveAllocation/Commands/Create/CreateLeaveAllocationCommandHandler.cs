@@ -45,6 +45,7 @@ public class CreateLeaveAllocationCommandHandler : IRequestHandler<CreateLeaveAl
                 var newLeaveAllocation = _mapper.Map<Domain.LeaveAllocation>(request);
                 newLeaveAllocation.EmployeeId = employee.Id;
                 newLeaveAllocation.Period = period;
+                newLeaveAllocation.NumberOfDays = leaveType.DefaultDays;
                 await _leaveAllocationRepository.CreateAsync(newLeaveAllocation, cancellationToken);
             }
         }

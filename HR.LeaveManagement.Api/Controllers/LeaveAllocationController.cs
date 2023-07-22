@@ -34,7 +34,7 @@ public class LeaveAllocationController : BaseController
         return CreatedAtAction(nameof(GetAsync), new { id = result });
     }
 
-    [HttpPut]
+    [HttpPut]   
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
