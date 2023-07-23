@@ -42,6 +42,7 @@ public class LeaveRequestService : BaseHttpService, ILeaveRequestService
     {
         await AddBearerTokenToHeader();
         var leaveRequests = await _client.LeaveRequestAllAsync(page, pageSize, cancellation);
+        List<LeaveRequestViewModel> result = null;
         return _mapper.Map<List<LeaveRequestViewModel>>(leaveRequests);
     }
 

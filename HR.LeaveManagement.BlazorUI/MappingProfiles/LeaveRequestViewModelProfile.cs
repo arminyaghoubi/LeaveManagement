@@ -8,7 +8,8 @@ public class LeaveRequestViewModelProfile : Profile
 {
     public LeaveRequestViewModelProfile()
     {
-        CreateMap<LeaveRequestViewModel, CreateLeaveRequestCommand>();
         CreateMap<GetLeaveRequestDto, LeaveRequestViewModel>();
+        CreateMap<LeaveRequestViewModel, CreateLeaveRequestCommand>();
+        CreateMap<Employee, EmployeeViewModel>();
     }
 }
