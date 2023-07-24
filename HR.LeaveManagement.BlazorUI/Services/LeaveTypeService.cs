@@ -18,8 +18,7 @@ public class LeaveTypeService : BaseHttpService, ILeaveTypeService
     }
 
     public async Task<List<LeaveTypeViewModel>> GetAllAsync(int? page, int? pageSize, CancellationToken cancellation)
-    {
-        await AddBearerTokenToHeader();
+    {        
         var leaveTypes = await _client.LeaveTypeAllAsync(page, pageSize, cancellation);
         return _mapper.Map<List<LeaveTypeViewModel>>(leaveTypes);
     }

@@ -21,8 +21,6 @@ public class LeaveRequestService : BaseHttpService, ILeaveRequestService
     {
         try
         {
-            await AddBearerTokenToHeader();
-
             var command = _mapper.Map<CreateLeaveRequestCommand>(leaveRequest);
 
             await _client.LeaveRequestPOSTAsync(command, cancellation);
@@ -40,7 +38,6 @@ public class LeaveRequestService : BaseHttpService, ILeaveRequestService
 
     public async Task<List<LeaveRequestViewModel>> GetAllAsync(int? page, int? pageSize, CancellationToken cancellation)
     {
-        await AddBearerTokenToHeader();
         var leaveRequests = await _client.LeaveRequestAllAsync(page, pageSize, cancellation);
         List<LeaveRequestViewModel> result = null;
         return _mapper.Map<List<LeaveRequestViewModel>>(leaveRequests);

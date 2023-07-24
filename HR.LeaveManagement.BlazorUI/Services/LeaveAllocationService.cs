@@ -14,8 +14,7 @@ public class LeaveAllocationService : BaseHttpService, ILeaveAllocationService
     public async Task<Response<Guid>> CreateLeaveAllocationsAsync(int leaveTypeId)
     {
         try
-        {
-            await AddBearerTokenToHeader();
+        {            
             await _client.LeaveAllocationPOSTAsync(new CreateLeaveAllocationCommand
             {
                 LeaveTypeId=leaveTypeId
