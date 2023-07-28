@@ -1,9 +1,10 @@
 ﻿using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.Common;
 using HR.LeaveManagement.Application.Features.LeaveType.Queries.GetAll;
+using HR.LeaveManagement.Application.Models.Identity;
 
 namespace HR.LeaveManagement.Application.Features.LeaveRequest.Queries.GetDetails;
 
-public class GetLeaveRequestDetailsDto: BaseLeaveRequestDto
+public class GetLeaveRequestDetailsDto : BaseLeaveRequestDto
 {
     public int Id { get; set; }
     public DateTime CreationDate { get; set; }
@@ -14,4 +15,5 @@ public class GetLeaveRequestDetailsDto: BaseLeaveRequestDto
     public bool? Approved { get; set; }
     public bool Cancelled { get; set; }
     public string EmployeeId { get; set; } = string.Empty;
+    public Employee Employee { get; set; }
 }

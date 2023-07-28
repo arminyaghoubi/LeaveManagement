@@ -1,5 +1,61 @@
 ﻿@page "/LeaveRequest/Details/{id:int}"
 
-<h3>Details</h3>
+@if (ViewModel is null)
+{
+    <p>Loading Data...</p>
+}
+else
+{
+    <div class="card @CardClass">
+        <h5 class="card-header">Leave Request Details - Request Date @ViewModel.RequestDate.ToString("yyyy/MM/dd")</h5>
+        <div class="card-body">
+            <h5 class="card-title">Employee name: @ViewModel.Employee.FirstName @ViewModel.Employee.LastName</h5>
 
+            <p class="card-text">
+                <dl class="row">
+                    <dt class="col-md-2">
+                        Start Date
+                    </dt>
+                    <dd class="col-md-10">
+                        @ViewModel.StartDate.ToString("yyyy/MM/dd")
+                    </dd>
 
+                    <dt class="col-md-2">
+                        End Date
+                    </dt>
+                    <dd class="col-md-10">
+                        @ViewModel.EndDate.ToString("yyyy/MM/dd")
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Total Days
+                    </dt>
+                    <dd class="col-md-10">
+                        @((ViewModel.EndDate - ViewModel.StartDate).Days)
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Leave Type
+                    </dt>
+                    <dd class="col-md-10">
+                        @ViewModel.LeaveType.Name
+                    </dd>
+
+                    <dt class="col-md-2">
+                        Comment
+                    </dt>
+                    <dd class="col-md-10">
+                        @ViewModel.Comment
+                    </dd>
+                </dl>
+            </p>
+
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-success" @onclick="ApproveRequestAsync">Approve</button>
+                <button type="button" class="btn btn-danger" onclick="RejectRequestAsync">Reject</button>
+            </div>
+
+            <a href="/LeaveRequest/Index" class="btn btn-outline-primary">Go To List</a>
+        </div>
+    </div>
+}

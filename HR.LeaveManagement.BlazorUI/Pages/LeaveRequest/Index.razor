@@ -1,5 +1,42 @@
 ﻿@page "/LeaveRequest/Index"
 
+<div class="row">
+    <div class="col-md-3">
+        <div class="card border-primary">
+            <div class="card-body">
+                <h5 class="card-title">Total Requests</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">@ReportLeaveRequest.TotalRequests</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-warning">
+            <div class="card-body">
+                <h5 class="card-title">Pending Requests</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">@ReportLeaveRequest.PendingRequests</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-danger">
+            <div class="card-body">
+                <h5 class="card-title">Rejected Requests</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">@ReportLeaveRequest.RejectedRequests</h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card border-success">
+            <div class="card-body">
+                <h5 class="card-title">Approved Requests</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">@ReportLeaveRequest.ApprovedRequests</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
 <div class="card">
     <div class="card-body">
         <h3 class="card-title">Leave Request</h3>
@@ -17,12 +54,13 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Leave Type</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Request Date</th>
+                        <th>Status</th>
                         <th>Operations</th>
                     </tr>
                 </thead>
@@ -30,18 +68,35 @@
                     @foreach (var item in LeaveRequests)
                     {
                         <tr>
-                            <td>@item.Id</td>
                             <td>@item.Employee.FirstName</td>
                             <td>@item.Employee.LastName</td>
+                            <td>@item.LeaveType.Name</td>
                             <td>@item.StartDate.ToString("yyyy/MM/dd")</td>
                             <td>@item.EndDate.ToString("yyyy/MM/dd")</td>
-                            <td>@item.RequestDate</td>
+                            <td>@item.RequestDate.ToString("yyyy/MM/dd HH:mm:ss")</td>
                             <td>
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    @*<a href="/LeaveType/Edit/@item.Id" class="btn btn-primary">Edit</a>
-                                    <a href="/LeaveType/Details/@item.Id" class="btn btn-primary">Details</a>*@
-                                    
-                                </div>
+                                @if (item.Cancelled)
+                                {
+                                    <span class="badge bg-secondary">Cancelled</span>
+                                }
+                                else if (item.Approved == true)
+                                {
+                                    <span class="badge bg-success">Approved</span>
+                                }
+                                else if (item.Approved == true)
+                                {
+                                    <span class="badge bg-danger">Rejected</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning">Pending</span>
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="/LeaveRequest/Details/@item.Id">
+                                    <i class="oi oi-file"></i>
+                                    Review
+                                </a>
                             </td>
                         </tr>
                     }

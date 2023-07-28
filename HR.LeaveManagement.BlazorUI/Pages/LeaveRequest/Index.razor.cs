@@ -23,6 +23,8 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveRequest
     {
         public List<LeaveRequestViewModel> LeaveRequests { get; set; }
 
+        public ReportLeaveRequestViewModel ReportLeaveRequest { get; set; } = new ReportLeaveRequestViewModel();
+
         [Inject]
         public ILeaveRequestService LeaveRequestService { get; set; }
 
@@ -34,6 +36,7 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveRequest
         private async Task LoadLeaveRequestsAsync()
         {
             LeaveRequests = await LeaveRequestService.GetAllAsync(1, 20, CancellationToken.None);
+            ReportLeaveRequest = LeaveRequestService.GetReportLeaveRequest(LeaveRequests);
         }
     }
 }

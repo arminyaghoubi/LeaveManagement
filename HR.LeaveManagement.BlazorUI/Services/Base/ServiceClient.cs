@@ -835,11 +835,11 @@ namespace HR.LeaveManagement.BlazorUI.Services.Base
                     try
                     {
                         var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        //if (response_.Content != null && response_.Content.Headers != null)
-                        //{
-                        //    foreach (var item_ in response_.Content.Headers)
-                        //        headers_[item_.Key] = item_.Value;
-                        //}
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
 
                         ProcessResponse(client_, response_);
 
@@ -1837,6 +1837,11 @@ namespace HR.LeaveManagement.BlazorUI.Services.Base
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
         public string EmployeeId { get; set; }
 
+        [System.Text.Json.Serialization.JsonPropertyName("employee")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public Employee Employee { get; set; }
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.19.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -1861,17 +1866,17 @@ namespace HR.LeaveManagement.BlazorUI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("requestDate")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public System.DateTime RequestDate { get; set; }
+        public System.DateTimeOffset RequestDate { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("startDate")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public System.DateTime StartDate { get; set; }
+        public System.DateTimeOffset StartDate { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("endDate")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public System.DateTime EndDate { get; set; }
+        public System.DateTimeOffset EndDate { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("approved")]
 

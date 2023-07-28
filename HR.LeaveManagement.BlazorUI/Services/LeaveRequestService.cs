@@ -39,12 +39,21 @@ public class LeaveRequestService : BaseHttpService, ILeaveRequestService
     public async Task<List<LeaveRequestViewModel>> GetAllAsync(int? page, int? pageSize, CancellationToken cancellation)
     {
         var leaveRequests = await _client.LeaveRequestAllAsync(page, pageSize, cancellation);
-        List<LeaveRequestViewModel> result = null;
         return _mapper.Map<List<LeaveRequestViewModel>>(leaveRequests);
     }
 
-    public Task<LeaveRequestViewModel> GetByIdAsync(int id, CancellationToken cancellation)
+    public async Task<LeaveRequestViewModel> GetByIdAsync(int id, CancellationToken cancellation)
     {
-        throw new NotImplementedException();
+        var leaveRequest = await _client.LeaveRequestGETAsync(id, cancellation);
+        return _mapper.Map<LeaveRequestViewModel>(leaveRequest);
     }
+
+    public ReportLeaveRequestViewModel GetReportLeaveRequest(IEnumerable<LeaveRequestViewModel> leaveRequest) =>
+        new ReportLeaveRequestViewModel
+        {
+            TotalRequests = leaveRequest.Count(),
+            ApprovedRequests = leaveRequest.Count(l => l.Approved is true),
+            PendingRequests = leaveRequest.Count(l => l.Cancelled is false && l.Approved is null),
+            RejectedRequests = leaveRequest.Count(l => l.Cancelled is true)
+        };
 }

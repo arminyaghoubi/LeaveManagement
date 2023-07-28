@@ -10,4 +10,6 @@ public interface ILeaveRequestService
     Task<LeaveRequestViewModel> GetByIdAsync(int id, CancellationToken cancellation);
 
     Task<Response<Guid>> CreateAsync(LeaveRequestViewModel leaveType, CancellationToken cancellation);
+
+    ReportLeaveRequestViewModel GetReportLeaveRequest(IEnumerable<LeaveRequestViewModel> leaveRequest);
 }
