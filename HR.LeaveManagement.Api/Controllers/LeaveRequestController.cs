@@ -1,4 +1,5 @@
 ﻿using HR.LeaveManagement.Api.Controllers.Common;
+using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.ChangeApproval;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.Create;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.Delete;
 using HR.LeaveManagement.Application.Features.LeaveRequest.Commands.Update;
@@ -38,5 +39,16 @@ public class LeaveRequestController : BaseController
     {
         var result = await _mediator.Send(leaveRequest, cancellation);
         return CreatedAtAction(nameof(GetAsync), new { id = result });
+    }
+
+    [HttpPut("ChangeApproval")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesDefaultResponseType]
+    public async Task<ActionResult> ChangeApprovalAsync(ChangeLeaveRequestApprovalCommand leaveRequest, CancellationToken cancellation)
+    {
+        await _mediator.Send(leaveRequest, cancellation);
+        return NoContent();
     }
 }

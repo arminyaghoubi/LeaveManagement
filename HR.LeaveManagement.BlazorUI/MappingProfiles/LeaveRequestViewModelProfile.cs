@@ -18,7 +18,7 @@ public class LeaveRequestViewModelProfile : Profile
             .ForMember(l => l.StartDate, l => l.MapFrom(m => m.StartDate.DateTime))
             .ForMember(l => l.RequestDate, l => l.MapFrom(m => m.StartDate.DateTime));
 
-        CreateMap<CreateLeaveRequestCommand, LeaveRequestViewModel>();
+        CreateMap<CreateLeaveRequestCommand, LeaveRequestViewModel>().ReverseMap();
 
         CreateMap<Employee, EmployeeViewModel>();
     }

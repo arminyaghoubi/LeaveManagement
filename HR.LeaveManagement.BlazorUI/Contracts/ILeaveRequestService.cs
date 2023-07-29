@@ -9,7 +9,9 @@ public interface ILeaveRequestService
 
     Task<LeaveRequestViewModel> GetByIdAsync(int id, CancellationToken cancellation);
 
-    Task<Response<Guid>> CreateAsync(LeaveRequestViewModel leaveType, CancellationToken cancellation);
+    Task<Response<Guid>> CreateAsync(LeaveRequestViewModel leaveRequest, CancellationToken cancellation);
 
     ReportLeaveRequestViewModel GetReportLeaveRequest(IEnumerable<LeaveRequestViewModel> leaveRequest);
+
+    Task<Response<Guid>> ChangeApprovalAsync(int id, bool approved, CancellationToken cancellation);
 }

@@ -54,6 +54,27 @@ public class LeaveRequestService : BaseHttpService, ILeaveRequestService
             TotalRequests = leaveRequest.Count(),
             ApprovedRequests = leaveRequest.Count(l => l.Approved is true),
             PendingRequests = leaveRequest.Count(l => l.Cancelled is false && l.Approved is null),
-            RejectedRequests = leaveRequest.Count(l => l.Cancelled is true)
+            RejectedRequests = leaveRequest.Count(l => l.Approved is false)
         };
+
+    public async Task<Response<Guid>> ChangeApprovalAsync(int id, bool approved, CancellationToken cancellation)
+    {
+        try
+        {
+            await _client.ChangeApprovalAsync(new ChangeLeaveRequestApprovalCommand
+            {
+                Id = id,
+                Approved = approved
+            }, cancellation);
+
+            return new Response<Guid>
+            {
+                Success = true
+            };
+        }
+        catch (ApiException ex)
+        {
+            return ConvertExceptionToResponse(ex);
+        }
+    }
 }

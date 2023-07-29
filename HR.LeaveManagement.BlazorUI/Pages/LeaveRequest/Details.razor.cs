@@ -31,6 +31,9 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveRequest
         [Inject]
         public ILeaveRequestService LeaveRequestService { get; set; }
 
+        [Inject]
+        public NavigationManager Navigation { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             await LoadLeaveRequestAsync(Id);
@@ -60,12 +63,14 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveRequest
 
         protected async Task ApproveRequestAsync()
         {
-
+            await LeaveRequestService.ChangeApprovalAsync(Id, true, CancellationToken.None);
+            Navigation.NavigateTo("/LeaveRequest/Index");
         }
 
         protected async Task RejectRequestAsync()
         {
-
+            await LeaveRequestService.ChangeApprovalAsync(Id, false, CancellationToken.None);
+            Navigation.NavigateTo("/LeaveRequest/Index");
         }
     }
 }

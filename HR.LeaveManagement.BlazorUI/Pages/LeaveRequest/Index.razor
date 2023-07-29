@@ -42,7 +42,7 @@
         <h3 class="card-title">Leave Request</h3>
         <hr />
         <p>
-            <a href="/LeaveRequest/Create" class="btn btn-primary">Create</a>
+            <a href="/LeaveRequest/Create" class="btn btn-primary">Create a leave request</a>
         </p>
 
         @if (LeaveRequests is null)
@@ -83,7 +83,7 @@
                                 {
                                     <span class="badge bg-success">Approved</span>
                                 }
-                                else if (item.Approved == true)
+                                else if (item.Approved == false)
                                 {
                                     <span class="badge bg-danger">Rejected</span>
                                 }
