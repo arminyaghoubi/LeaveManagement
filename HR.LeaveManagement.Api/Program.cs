@@ -3,6 +3,7 @@ using HR.LeaveManagement.Application;
 using HR.LeaveManagement.Infrastructure;
 using HR.LeaveManagement.Persistence;
 using HR.LeaveManagement.Identity;
+using Serilog;
 
 var myAllowSpecificOrigins = "All";
 
@@ -27,6 +28,10 @@ builder.Services.AddCors(options =>
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
+builder.Host.UseSerilog((context,configure)=>
+    configure.WriteTo.Console()
+    .ReadFrom.Configuration(context.Configuration));
+
 builder.Services.AddApplicationServices()
     .AddInfrastructureServices(configuration)
     .AddPersistenceServices(configuration)
@@ -48,6 +53,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options => options.InjectStylesheet("/swagger-ui/SwaggerDark.css"));
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

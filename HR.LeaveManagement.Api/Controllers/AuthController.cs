@@ -10,18 +10,15 @@ public class AuthController : BaseController
 {
     private readonly IAuthService _service;
 
-    public AuthController(IAuthService service)
-    {
-        _service = service;
-    }
+    public AuthController(IAuthService service) => _service = service;
 
     [AllowAnonymous]
     [HttpPost("Login")]
-    public async Task<ActionResult<AuthResponse>> LoginAsync(AuthRequest request) => 
+    public async Task<ActionResult<AuthResponse>> LoginAsync(AuthRequest request) =>
         Ok(await _service.LoginAsync(request));
 
     [AllowAnonymous]
     [HttpPost("Registration")]
-    public async Task<ActionResult<RegistrationResponse>> RegistrationAsync(RegistrationRequest request) => 
+    public async Task<ActionResult<RegistrationResponse>> RegistrationAsync(RegistrationRequest request) =>
         Ok(await _service.RegisterAsync(request));
 }
