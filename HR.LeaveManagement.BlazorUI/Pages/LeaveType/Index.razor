@@ -72,20 +72,3 @@
 {
     <div class="modal-backdrop fade show"></div>
 }
-
-@if (!string.IsNullOrEmpty(ToastMessage))
-{
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <i class="bi bi-info-circle"></i>
-                <strong class="me-auto">Notification</strong>
-                <small>Now</small>
-                <button @onclick="()=>ToastMessage=null" type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                @ToastMessage
-            </div>
-        </div>
-    </div>
-}

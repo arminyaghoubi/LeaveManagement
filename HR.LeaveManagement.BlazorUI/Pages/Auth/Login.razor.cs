@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using HR.LeaveManagement.BlazorUI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using HR.LeaveManagement.BlazorUI.Contracts;
+using Blazored.Toast.Services;
 
 namespace HR.LeaveManagement.BlazorUI.Pages.Auth
 {
@@ -25,6 +26,9 @@ namespace HR.LeaveManagement.BlazorUI.Pages.Auth
         public LoginViewModel ViewModel { get; set; }
 
         public string Message { get; set; }
+
+        [Inject]
+        public IToastService ToastService { get; set; }
 
         [Inject]
         public NavigationManager Navigation { get; set; }
@@ -42,10 +46,12 @@ namespace HR.LeaveManagement.BlazorUI.Pages.Auth
             Message = string.Empty;
             if (await AuthService.LoginAsync(ViewModel.Email, ViewModel.Password))
             {
+                ToastService.ShowSuccess("You have successfully logged in.");
                 Navigation.NavigateTo("/");
             }
             else
             {
+                ToastService.ShowError("Login failed.");
                 Message = "Invaid Username or password!";
             }
         }

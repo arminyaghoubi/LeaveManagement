@@ -15,6 +15,7 @@ using HR.LeaveManagement.BlazorUI;
 using HR.LeaveManagement.BlazorUI.Shared;
 using HR.LeaveManagement.BlazorUI.ViewModels;
 using HR.LeaveManagement.BlazorUI.Contracts;
+using Blazored.Toast.Services;
 
 namespace HR.LeaveManagement.BlazorUI.Pages.LeaveType;
 
@@ -25,7 +26,8 @@ public partial class Index
     public string ModalDisplay = "none;";
     public LeaveTypeViewModel? DeleteItem = null;
 
-    public string ToastMessage { get; set; }
+    [Inject]
+    public IToastService ToastService { get; set; }
 
     [Inject]
     public ILeaveTypeService LeaveTypeService { get; set; }
@@ -73,14 +75,14 @@ public partial class Index
         await LeaveTypeService.DeleteAsync(DeleteItem.Id);
         await LoadLeaveTypes();
         CloseDeleteModal();
-        ToastMessage = "The deletion was successful.";
+        ToastService.ShowSuccess("The deletion was successful.");
         StateHasChanged();
     }
 
     protected async void AllocateLeaveType(int leaveTypeId)
     {
         await LeaveAllocationService.CreateLeaveAllocationsAsync(leaveTypeId);
-        ToastMessage = "The Allocation was successful.";
+        ToastService.ShowInfo("The Allocation was successful.");
         StateHasChanged();
     }
 }

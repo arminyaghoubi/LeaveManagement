@@ -16,6 +16,7 @@ using HR.LeaveManagement.BlazorUI.Shared;
 using Microsoft.AspNetCore.Components.Authorization;
 using HR.LeaveManagement.BlazorUI.ViewModels;
 using HR.LeaveManagement.BlazorUI.Contracts;
+using Blazored.Toast.Services;
 
 namespace HR.LeaveManagement.BlazorUI.Pages.LeaveRequest
 {
@@ -27,6 +28,9 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveRequest
         public LeaveRequestViewModel ViewModel { get; set; }
 
         public string CardClass { get; set; } = string.Empty;
+
+        [Inject]
+        public IToastService ToastService { get; set; }
 
         [Inject]
         public ILeaveRequestService LeaveRequestService { get; set; }
@@ -64,12 +68,14 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveRequest
         protected async Task ApproveRequestAsync()
         {
             await LeaveRequestService.ChangeApprovalAsync(Id, true, CancellationToken.None);
+            ToastService.ShowInfo("Approved successfully.");
             Navigation.NavigateTo("/LeaveRequest/Index");
         }
 
         protected async Task RejectRequestAsync()
         {
             await LeaveRequestService.ChangeApprovalAsync(Id, false, CancellationToken.None);
+            ToastService.ShowInfo("Rejected successfully.");
             Navigation.NavigateTo("/LeaveRequest/Index");
         }
     }

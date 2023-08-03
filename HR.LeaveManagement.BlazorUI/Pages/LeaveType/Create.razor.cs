@@ -15,6 +15,7 @@ using HR.LeaveManagement.BlazorUI;
 using HR.LeaveManagement.BlazorUI.Shared;
 using Microsoft.AspNetCore.Components.Authorization;
 using HR.LeaveManagement.BlazorUI.Contracts;
+using Blazored.Toast.Services;
 
 namespace HR.LeaveManagement.BlazorUI.Pages.LeaveType
 {
@@ -23,6 +24,9 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveType
         public ViewModels.LeaveTypeViewModel ViewModel { get; set; }
 
         public string Message { get; set; }
+
+        [Inject]
+        public IToastService ToastService { get; set; }
 
         [Inject]
         public ILeaveTypeService LeaveTypeService { get; set; }
@@ -41,7 +45,10 @@ namespace HR.LeaveManagement.BlazorUI.Pages.LeaveType
             var response= await LeaveTypeService.CreateAsync(ViewModel, CancellationToken.None);
 
             if (response.Success)
+            {
+                ToastService.ShowSuccess("Created Successfully");
                 Navigation.NavigateTo("/LeaveType/Index");
+            }
             else
                 Message= response.ValidationErrors;
         }
